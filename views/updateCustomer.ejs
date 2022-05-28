@@ -1,0 +1,47 @@
+<br>
+<div class="card">
+    <div class="card-header">
+        <h4 class="font-weight-bold">Atualizar um úsuario</h4>
+    </div>
+    <div class="card-body">
+        <form action="/updateCustomer/<%= customer._id %>" method="post">
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="firstname" class="col-form-label">Primeiro nome: </label>
+                        <input type="text" class="form-control" value="<%= customer.firstname %>" name="firstname" placeholder="Digite seu primeiro nome" id="firstname">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="firstname" class="col-form-label">Sobrenome: </label>
+                        <input type="text" class="form-control" value="<%= customer.lastname %>" name="lastname" placeholder="Digite seu sobrenome" id="lastname">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="firstname" class="col-form-label">Número de telefone: </label>
+                        <input type="number" class="form-control" value="<%= customer.phonenumber %>" name="phonenumber" placeholder="Digite seu telefone" id="phonenumber">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="firstname" class="col-form-label">CPF: </label>
+                        <input type="text" class="form-control" value="<%= customer.cpf %>" name="cpf" placeholder="Digite seu CPF" id="cpf">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="firstname" class="col-form-label">Endereço: </label>
+                        <input type="text" class="form-control" value="<%= customer.address %>" name="address" placeholder="Digite seu endereço" id="address" rows="3"> 
+                    </div>
+                </div>
+            </div>
+            <div class="">
+                <br>
+                <button type="submit" class="btn btn-primary">Atualizar</button>
+                <a href="/" class="btn btn-light">Cancelar</a>
+            </div>
+        </form>
+    </div>
+  </div>

@@ -1,0 +1,44 @@
+<br>
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-8">
+                <h4 class="font-weight-bold">Todas as contas bancarias</h4>
+            </div>
+            <div class="col-4 float-right">
+                <a href="/addBankAccount" class="btn btn-success float-right"><i class="bi bi-plus-circle"></i> Adicionar nova conta de banco</a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Número</th>
+                    <th scope="col">Saldo</th>
+                    <th scope="col">Usuario</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if(bankAccounts.length > 0) { %>
+                    <% for(let bankAccount of bankAccounts) { %>
+                        <tr>
+                            <th scope="row"><%= bankAccount.number %></th>
+                            <td><%= bankAccount.balance %></td>
+                            <td><%= bankAccount.user %></td>
+                            <!-- <td><%= bankAccount.address %></td> -->
+                            <td>
+                                <a href="/updateBankAccount/<%= bankAccount._id %>" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
+                                <a href="/deleteBankAccount/<%= bankAccount._id %>" class="btn btn-sm btn-warning"><i class="bi bi-trash"></i></a>
+                            </td>
+                        </tr>
+                    <% } %>
+                <% } else { %>
+                    <tr>
+                        <td>Nenhum usuario encontrado</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+</div>

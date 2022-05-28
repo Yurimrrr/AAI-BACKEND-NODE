@@ -1,0 +1,35 @@
+<br>
+<div class="card">
+    <div class="card-header">
+        <h4 class="font-weight-bold">Adicionar nova conta de banco</h4>
+    </div>
+    <div class="card-body">
+        <form action="/addBankAccount" method="post">
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="firstname" class="col-form-label">Numero da conta: </label>
+                        <input type="text" class="form-control" name="number" placeholder="Digite o numero da conta" id="number">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="firstname" class="col-form-label">Saldo atual: </label>
+                        <input type="text" class="form-control" name="balance" placeholder="Digite seu saldo atual" id="balance">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="firstname" class="col-form-label">Usuario: </label>
+                        <input type="number" class="form-control" name="user" placeholder="Digite o id do usuario, rever como fazer pesquisa de list aq" id="user">
+                    </div>
+                </div>
+            </div>
+            <div class="">
+                <br>
+                <button type="submit" class="btn btn-primary">Salvar</button>
+                <a href="/" class="btn btn-light">Cancelar</a>
+            </div>
+        </form>
+    </div>
+  </div>

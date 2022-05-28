@@ -1,0 +1,47 @@
+<br>
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-8">
+                <h4 class="font-weight-bold">Todos úsuarios</h4>
+            </div>
+            <div class="col-4 float-right">
+                <a href="/addCustomer" class="btn btn-success float-right"><i class="bi bi-plus-circle"></i> Adicionar novo usuario</a>
+                <a href="/getAllBankAccounts" class="btn btn-success float-right"><i class="bi bi-plus-circle"></i> Visualizar contas bancarias</a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Numero de telefone</th>
+                    <th scope="col">CPF</th>
+                    <th scope="col">Endereço</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if(customers.length > 0) { %>
+                    <% for(let customer of customers) { %>
+                        <tr>
+                            <th scope="row"><%= customer.firstname %> <%= customer.lastname %></th>
+                            <td><%= customer.phonenumber %></td>
+                            <td><%= customer.cpf %></td>
+                            <td><%= customer.address %></td>
+                            <td>
+                                <a href="/updateCustomer/<%= customer._id %>" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
+                                <a href="/deleteCustomer/<%= customer._id %>" class="btn btn-sm btn-warning"><i class="bi bi-trash"></i></a>
+                            </td>
+                        </tr>
+                    <% } %>
+                <% } else { %>
+                    <tr>
+                        <td>Nenhum usuario encontrado</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+</div>
