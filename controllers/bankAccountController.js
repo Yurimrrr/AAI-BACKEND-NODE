@@ -1,15 +1,20 @@
+const { add } = require('winston');
 const {BankAccount, validate} = require('../models/bankAccount');
+const {Customer} = require('../models/costumer');
 
 const getAllBankAccount = async(req, res, next) => {
     const list = await BankAccount.find().exec()
-
     res.render('bankAccountlist', {
-        bankAccounts: list
+        bankAccounts: list,
     }) 
 }
 
-const getAddBankAccountView = (req, res, next) => {
-    res.render('addBankAccount');
+
+const getAddBankAccountView = async(req, res, next) => {
+    const listCustomer = await Customer.find().exec()
+    res.render('addBankAccount', {
+        customers: listCustomer
+    });
 }
 
 const addBankAccount = async (req, res, next) => {
@@ -22,6 +27,7 @@ const addBankAccount = async (req, res, next) => {
         user: data.user
     });
     BankAccount = await BankAccount.save();
+
     res.redirect('/getAllBankAccounts');
 }
 
@@ -85,5 +91,5 @@ module.exports = {
     getUpdateBankAccountView,
     updateBankAccount, 
     getDeleteBankAccountView,
-    deleteBankAccount
+    deleteBankAccount,
 }
