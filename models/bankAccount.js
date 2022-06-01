@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Joi = require('joi')
-// const Costumer = require("./costumer")
+Joi.objectId = require('joi-objectid')(Joi)
+    // const Costumer = require("./costumer")
 
 const bankAccountSchema = new mongoose.Schema({
     number: {
@@ -13,8 +14,9 @@ const bankAccountSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    user: { //pesquisar como fazer referenciar objectId de outro documento no mongoose
-        type: Number,
+    costumerId: { //pesquisar como fazer referenciar objectId de outro documento no mongoose
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Costumer',
         required: true
     },
 });
@@ -25,7 +27,7 @@ const validateBankAccount = (bankAccount) => {
     const schema = {
         number: Joi.string().min(5).max(50).required(),
         balance: Joi.number().required(),
-        user: Joi.number().required(),
+        costumerId: Joi.objectId().required(),
     }
     return Joi.validate(bankAccount, schema)
 }

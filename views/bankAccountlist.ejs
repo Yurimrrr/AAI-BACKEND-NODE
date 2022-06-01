@@ -17,27 +17,34 @@
                     <th scope="col">Número</th>
                     <th scope="col">Saldo</th>
                     <th scope="col">Usuario</th>
+                    <th scope="col">Ações</th>
                 </tr>
             </thead>
             <tbody>
                 <% if(bankAccounts.length > 0) { %>
                     <% for(let bankAccount of bankAccounts) { %>
                         <tr>
-                            <th scope="row"><%= bankAccount.number %></th>
-                            <td><%= bankAccount.balance %></td>
-                            <td><%= bankAccount.user %></td>
+                            <th scope="row">
+                                <%= bankAccount.number %>
+                            </th>
+                            <td>
+                                <%= bankAccount.balance %>
+                            </td>
+                            <td>
+                                <%= bankAccount.user %>
+                            </td>
                             <!-- <td><%= bankAccount.address %></td> -->
                             <td>
                                 <a href="/updateBankAccount/<%= bankAccount._id %>" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
                                 <a href="/deleteBankAccount/<%= bankAccount._id %>" class="btn btn-sm btn-warning"><i class="bi bi-trash"></i></a>
                             </td>
                         </tr>
-                    <% } %>
-                <% } else { %>
-                    <tr>
-                        <td>Nenhum usuario encontrado</td>
-                    </tr>
-                <% } %>
+                        <% } %>
+                            <% } else { %>
+                                <tr>
+                                    <td>Nenhum usuario encontrado</td>
+                                </tr>
+                                <% } %>
             </tbody>
         </table>
     </div>
