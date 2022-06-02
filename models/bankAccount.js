@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const Joi = require('joi')
 Joi.objectId = require('joi-objectid')(Joi)
-    // const customer = require("./customer")
 
 const bankAccountSchema = new mongoose.Schema({
     number: {

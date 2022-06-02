@@ -6,14 +6,16 @@ const getAllCustomer = async(req, res, next) => {
     res.render('customerlist', {
         customers: list,
         customerActive: true,
-        bankActive: false
+        bankActive: false,
+        transactionActive: false
     })
 }
 
 const getAddCustomerView = (req, res, next) => {
     res.render('addCustomer', {
         customerActive: true,
-        bankActive: false
+        bankActive: false,
+        transactionActive: false
     });
 }
 
@@ -39,7 +41,8 @@ const getUpdateCustomerView = async(req, res, next) => {
         res.render('updateCustomer', {
             customer: onecustomer,
             customerActive: true,
-            bankActive: false
+            bankActive: false,
+            transactionActive: false
         })
     } catch (error) {
         res.status(400).send(error.message)
@@ -70,7 +73,8 @@ const getDeleteCustomerView = async(req, res, next) => {
         res.render('deleteCustomer', {
             customer: onecustomer,
             bankActive: true,
-            customerActive: false
+            customerActive: false,
+            transactionActive: false
         })
     } catch (error) {
         res.status(400).send(error.message)

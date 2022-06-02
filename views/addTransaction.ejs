@@ -1,0 +1,43 @@
+<br>
+<div class="card">
+    <div class="card-header">
+        <h4 class="font-weight-bold">Adicionar nova transação</h4>
+    </div>
+    <div class="card-body">
+        <form action="/addTransaction" method="post">
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="firstname" class="col-form-label">Operação: </label>
+                        <select class="form-select" aria-label="Default select example" name="operation" id="operation">
+                            <option value="true">Saque</option>
+                            <option value="false">Deposito</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="firstname" class="col-form-label">Valor monetario: </label>
+                        <input type="number" class="form-control" name="value" placeholder="Digite seu saldo atual" id="value">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="firstname" class="col-form-label">Conta à operar: </label>
+                        <select class="form-select" aria-label="Default select example" name="bankAccountId" id="bankAccountId">
+                            <option value="0">Selecione</option>
+                            <% for(let bankAccount of bankAccounts) { %>
+                                <option value="<%= bankAccount._id %>"><%= bankAccount.number %></option>
+                            <% } %>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="">
+                <br>
+                <button type="submit" class="btn btn-primary">Salvar</button>
+                <a href="/" class="btn btn-light">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>

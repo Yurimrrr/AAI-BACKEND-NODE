@@ -37,7 +37,7 @@ const validateCustomer = (customer) => {
         firstname: Joi.string().min(5).max(50).required(),
         lastname: Joi.string().min(5).max(50).required(),
         phonenumber: Joi.string().min(11).required(),
-        cpf: Joi.string().min(11).required(),
+        cpf: Joi.string().min(11).max(11).required(),
         address: Joi.string().required(),
     }
     return Joi.validate(customer, schema)

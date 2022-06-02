@@ -1,0 +1,60 @@
+<br>
+<div class="row">
+    <div class="col-12 float-left">
+        <a href="/addTransaction" class="btn btn-success float-right"><i class="bi bi-plus-circle"></i> Adicionar nova transação</a>
+    </div>
+</div>
+<br>
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-8">
+                <h4 class="font-weight-bold">Todas as transações</h4>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Operação</th>
+                    <th scope="col">Valor</th>
+                    <th scope="col">Conta</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if(transactions.length > 0) { %>
+                    <% for(let transaction of transactions) { %>
+                        <tr>
+                            <th scope="row">
+                                <%= transaction.operation %>
+                            </th>
+                            <td>
+                                <%= transaction.value %>
+                            </td>
+                            <td>
+                                <%= transaction.bank %>
+                            </td>
+                            <td>
+                                <a href="/updateTransaction/<%= transaction._id %>" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
+                                <a href="/deleteTransaction/<%= transaction._id %>" class="btn btn-sm btn-warning"><i class="bi bi-trash"></i></a>
+                            </td>
+                        </tr>
+                        <% } %>
+                            <% } else { %>
+                                <tr>
+                                    <td>Nenhuma transação encontrada</td>
+                                </tr>
+                                <% } %>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-4 float-right">
+        <br>
+        <a href="/" class="btn btn-success float-right">Voltar ao inicio</a>
+    </div>
+</div>
