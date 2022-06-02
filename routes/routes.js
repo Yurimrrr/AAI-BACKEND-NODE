@@ -4,7 +4,8 @@ const {getAllCustomer, getAddCustomerView,
     updateCustomer, getDeleteCustomerView,
     deleteCustomer} = require('../controllers/customerController')
 
-const {getAllBankAccount, getAddBankAccountView, addBankAccount} = require('../controllers/bankAccountController')
+const {getAllBankAccount, getAddBankAccountView, addBankAccount, 
+    getUpdateBankAccountView, updateBankAccount, getDeleteBankAccountView, deleteBankAccount} = require('../controllers/bankAccountController')
 
 const router = express.Router();
 
@@ -18,7 +19,10 @@ router.post('/deleteCustomer/:id', deleteCustomer)
 router.get('/getAllBankAccounts', getAllBankAccount)
 router.get('/addBankAccount', getAddBankAccountView)
 router.post('/addBankAccount', addBankAccount)
-
+router.get('/updateBankAccount/:id', getUpdateBankAccountView)
+router.post('/updateBankAccount/:id', updateBankAccount)
+router.get('/deleteBankAccount/:id', getDeleteBankAccountView)
+router.post('/deleteBankAccount/:id', deleteBankAccount)
 
 module.exports = {
     routes: router

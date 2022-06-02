@@ -1,0 +1,22 @@
+<br>
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-8">
+            <h1 class="font-weight-bold">Conta : <%= bankAccount.number %></h1>
+            <h1 class="font-weight-bold">Usuario : <%= bankAccount.customer %></h1>
+            <p class="lead">Alerta! você quer realmente excluir essa conta?</p>
+            <p class="lead">
+                <form action="/deleteBankAccount/<%= bankAccount._id %>" method="post">
+                    <button class="btn btn-danger" type="submit">Delete</button>
+                    <a href="/" class="btn btn-light">Cancelar</a>
+                </form>
+            </p>
+        </div>
+        <div class="col-4">
+            <h1 class="font-weight-bolder text-danger float-right">
+                <i class="bi bi-trash"></i>
+            </h1>
+        </div>
+        <hr class="my-4">
+    </div>
+</div>
