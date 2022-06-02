@@ -21,7 +21,7 @@
                 <div class="col-6">
                     <div class="form-group">
                         <label for="firstname" class="col-form-label">Usuario: </label>
-                        <select class="form-select" aria-label="Default select example" name="costumerId" id="costumerId">
+                        <select class="form-select" aria-label="Default select example" name="customerId" id="customerId">
                             <option value="0">Selecione</option>
                             <% for(let customer of customers) { %>
                                 <option value="<%= customer._id %>"><%= customer.firstname %> <%= customer.lastname %></option>

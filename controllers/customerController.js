@@ -1,20 +1,20 @@
-const {Customer, validate} = require('../models/costumer');
+const { Customer, validate } = require('../models/customer');
 
 const getAllCustomer = async(req, res, next) => {
     const list = await Customer.find().exec()
 
     res.render('customerlist', {
         customers: list
-    }) 
+    })
 }
 
 const getAddCustomerView = (req, res, next) => {
     res.render('addCustomer');
 }
 
-const addCustomer = async (req, res, next) => {
-    const {error} = validate(req.body);
-    if(error) return res.status(422).send(error.details[0].message);
+const addCustomer = async(req, res, next) => {
+    const { error } = validate(req.body);
+    if (error) return res.status(422).send(error.details[0].message);
     const data = req.body
     let customer = await new Customer({
         firstname: data.firstname,
@@ -27,21 +27,21 @@ const addCustomer = async (req, res, next) => {
     res.redirect('/');
 }
 
-const getUpdateCustomerView = async (req, res, next) => {
-    try{
+const getUpdateCustomerView = async(req, res, next) => {
+    try {
         const id = req.params.id
         const onecustomer = await Customer.findById(id).exec()
-        res.render('updateCustomer',{
+        res.render('updateCustomer', {
             customer: onecustomer
         })
-    }catch(error){
+    } catch (error) {
         res.status(400).send(error.message)
     }
 }
 
 const updateCustomer = async(req, res, next) => {
-    const {error} = validate(req.body)
-    if(error) return res.status(422).send(error.details[0].message);
+    const { error } = validate(req.body)
+    if (error) return res.status(422).send(error.details[0].message);
     const id = req.params.id
     const data = req.body
     let customer = await Customer.findByIdAndUpdate(id, {
@@ -50,32 +50,32 @@ const updateCustomer = async(req, res, next) => {
         phonenumber: data.phonenumber,
         cpf: data.cpf,
         address: data.address,
-    }, {new: true});
-    if(!customer) return res.status(404).send('Não foi encontrado nenhum úsuario com o ID da requisição')
+    }, { new: true });
+    if (!customer) return res.status(404).send('Não foi encontrado nenhum úsuario com o ID da requisição')
 
     res.redirect('/');
 }
 
-const getDeleteCustomerView = async (req, res, next) => {
-    try{
+const getDeleteCustomerView = async(req, res, next) => {
+    try {
         const id = req.params.id
         const onecustomer = await Customer.findById(id).exec()
-        res.render('deleteCustomer',{
+        res.render('deleteCustomer', {
             customer: onecustomer
         })
-    }catch(error){
+    } catch (error) {
         res.status(400).send(error.message)
     }
 }
 
-const deleteCustomer = async (req, res, next) => {
-    try{
+const deleteCustomer = async(req, res, next) => {
+    try {
         const id = req.params.id
         const customer = await Customer.findByIdAndRemove(id)
 
-        if(!customer) return res.status(404).send('Não foi encontrado nenhum úsuario com o ID da requisição')
+        if (!customer) return res.status(404).send('Não foi encontrado nenhum úsuario com o ID da requisição')
         res.redirect('/')
-    }catch(error){
+    } catch (error) {
         res.status(400).send(error.message)
     }
 }
@@ -85,7 +85,7 @@ module.exports = {
     getAddCustomerView,
     addCustomer,
     getUpdateCustomerView,
-    updateCustomer, 
+    updateCustomer,
     getDeleteCustomerView,
     deleteCustomer
 }

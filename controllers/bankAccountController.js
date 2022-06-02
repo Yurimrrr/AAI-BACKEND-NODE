@@ -1,12 +1,31 @@
 // const { add } = require('winston');
 const { BankAccount, validate } = require('../models/bankAccount');
-const { Customer } = require('../models/costumer');
+const { Customer } = require('../models/customer');
 const mongoose = require('mongoose');
 
 const getAllBankAccount = async(req, res, next) => {
     const list = await BankAccount.find().exec()
+    const listCustomer = await Customer.find().exec()
+
+    const listCorreta = []
+
+    // console.log(list);
+
+    for (bank of list) {
+        for (customer of listCustomer) {
+            console.log(JSON.stringify(bank.customerId))
+            console.log(JSON.stringify(customer._id))
+            if (JSON.stringify(bank.customerId) == JSON.stringify(customer._id)) {
+                bank.customer = customer.firstname;
+            }
+        }
+        listCorreta.push(bank);
+    }
+
+    console.log(listCorreta);
+
     res.render('bankAccountlist', {
-        bankAccounts: list,
+        bankAccounts: listCorreta
     })
 }
 
@@ -23,12 +42,12 @@ const addBankAccount = async(req, res, next) => {
     if (error) return res.status(422).send(error.details[0].message);
     const data = req.body
 
-    let idCostumer = mongoose.Types.ObjectId(data.costumer);
+    let idcustomer = mongoose.Types.ObjectId(data.customer);
 
     let bankAccount = await new BankAccount({
         number: data.number,
         balance: data.balance,
-        costumerId: mongoose.Types.ObjectId(data.costumerId)
+        customerId: mongoose.Types.ObjectId(data.customerId)
     });
     console.log(await bankAccount.save());
 
