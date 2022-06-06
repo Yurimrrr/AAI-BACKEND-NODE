@@ -9,6 +9,8 @@ const getAllTransactions = async(req, res, next) => {
 
     const listCorreta = getBankAccountList(list, listBankAccounts)
 
+    console.log(listCorreta);
+
     res.render('transactionlist', {
         transactions: listCorreta,
         bankActive: false,
@@ -130,10 +132,13 @@ const getBankAccountList = (list, listBankAccounts) => {
     const listCorreta = []
 
     for (transactions of list) {
-        if (transactions.operation) {
-            transactions.operation = "Saque"
+        // console.log(typeof(transactions.operation))
+        if (transactions.operation == true) {
+            console.log("entrou true")
+            transactions.typeOperation = "Saque"
         } else {
-            transactions.operation = "Deposito"
+            console.log("entrou false")
+            transactions.typeOperation = "Deposito"
         }
         for (bank of listBankAccounts) {
             if (JSON.stringify(transactions.bankAccountId) == JSON.stringify(bank._id)) {
@@ -141,7 +146,7 @@ const getBankAccountList = (list, listBankAccounts) => {
                 transactions.bank = bank.number;
             }
         }
-        listCorreta.push(bank);
+        listCorreta.push(transactions);
     }
 
     return listCorreta

@@ -9,10 +9,13 @@ const getAllBankAccount = async(req, res, next) => {
 
     const listCorreta = getCustomerNameList(list, listCustomer)
 
+    console.log(listCorreta);
+    
     res.render('bankAccountlist', {
         bankAccounts: listCorreta,
         bankActive: true,
-        customerActive: false
+        customerActive: false,
+        transactionActive: false
     })
 }
 
@@ -54,7 +57,8 @@ const getUpdateBankAccountView = async(req, res, next) => {
             bankAccount: onebankAccount,
             customers: listCustomerCorreta,
             bankActive: true,
-            customerActive: false
+            customerActive: false,
+            transactionActive: false
         })
     } catch (error) {
         res.status(400).send(error.message)
@@ -91,7 +95,8 @@ const getDeleteBankAccountView = async(req, res, next) => {
         res.render('deleteBankAccount', {
             bankAccount: onebankAccount,
             bankActive: true,
-            customerActive: false
+            customerActive: false,
+            transactionActive: false
         })
     } catch (error) {
         res.status(400).send(error.message)
