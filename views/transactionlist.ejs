@@ -37,8 +37,7 @@
                                 <%= transaction.bank %>
                             </td>
                             <td>
-                                <a href="/updateTransaction/<%= transaction._id %>" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
-                                <a href="/deleteTransaction/<%= transaction._id %>" class="btn btn-sm btn-warning"><i class="bi bi-trash"></i></a>
+                                <a href="/viewTransaction/<%= transaction._id %>" class="btn btn-sm btn-warning"><i class="bi bi-arrows-fullscreen"></i></a>
                             </td>
                         </tr>
                         <% } %>
@@ -56,5 +55,6 @@
     <div class="col-4 float-right">
         <br>
         <a href="/" class="btn btn-success float-right">Voltar ao inicio</a>
+        <br>
     </div>
 </div>

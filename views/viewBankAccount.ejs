@@ -1,27 +1,27 @@
 <br>
 <div class="card">
     <div class="card-header">
-        <h4 class="font-weight-bold">Adicionar nova conta de banco</h4>
+        <h4 class="font-weight-bold">Visualizando conta bancaria</h4>
     </div>
     <div class="card-body">
-        <form action="/updateBankAccount/<%= bankAccount._id %>" method="post">
+        <form action="" method="post">
             <div class="row">
                 <div class="col-6">
                     <div class="form-group">
                         <label for="firstname" class="col-form-label">Numero da conta: </label>
-                        <input type="text" class="form-control" name="number" value="<%= bankAccount.number %>" placeholder="Digite o numero da conta" id="number">
+                        <input type="text" class="form-control" name="number" value="<%= bankAccount.number %>" placeholder="Digite o numero da conta" id="number" readonly>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="form-group">
                         <label for="firstname" class="col-form-label">Saldo atual: </label>
-                        <input type="text" class="form-control" name="balance" value="<%= bankAccount.balance %>" placeholder="Digite seu saldo atual" id="balance">
+                        <input type="text" class="form-control" name="balance" value="<%= bankAccount.balance %>" placeholder="Digite seu saldo atual" id="balance" readonly>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="form-group">
                         <label for="firstname" class="col-form-label">Usuario: </label>
-                        <select class="form-select" aria-label="Default select example" name="customerId" id="customerId">
+                        <select class="form-select" aria-label="Default select example" name="customerId" id="customerId" disabled>
                             <option value="0">Selecione</option>
                             <% for(let customer of customers) { %>
                                 <option value="<%= customer._id %>" <%= customer.selected %>><%= customer.firstname %> <%= customer.lastname %></option>
@@ -32,8 +32,8 @@
             </div>
             <div class="">
                 <br>
-                <button type="submit" class="btn btn-primary">Salvar</button>
-                <a href="/" class="btn btn-light">Cancelar</a>
+                <!-- <button type="submit" class="btn btn-primary">Salvar</button> -->
+                <a href="/" class="btn btn-light">Voltar</a>
             </div>
         </form>
     </div>

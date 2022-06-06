@@ -10,7 +10,7 @@ const getAllBankAccount = async(req, res, next) => {
     const listCorreta = getCustomerNameList(list, listCustomer)
 
     console.log(listCorreta);
-    
+
     res.render('bankAccountlist', {
         bankAccounts: listCorreta,
         bankActive: true,
@@ -45,7 +45,7 @@ const addBankAccount = async(req, res, next) => {
     res.redirect('/getAllBankAccounts');
 }
 
-const getUpdateBankAccountView = async(req, res, next) => {
+const getBankAccountView = async(req, res, next) => {
     try {
         const id = req.params.id
         const onebankAccount = await BankAccount.findById(id).exec()
@@ -53,7 +53,7 @@ const getUpdateBankAccountView = async(req, res, next) => {
 
         const listCustomerCorreta = getCustomerSelected(listCustomer, onebankAccount)
 
-        res.render('updateBankAccount', {
+        res.render('viewBankAccount', {
             bankAccount: onebankAccount,
             customers: listCustomerCorreta,
             bankActive: true,
@@ -65,20 +65,20 @@ const getUpdateBankAccountView = async(req, res, next) => {
     }
 }
 
-const updateBankAccount = async(req, res, next) => {
-    const { error } = validate(req.body)
-    if (error) return res.status(422).send(error.details[0].message);
-    const id = req.params.id
-    const data = req.body
-    let bankAccount = await BankAccount.findByIdAndUpdate(id, {
-        number: data.number,
-        balance: data.balance,
-        customerId: mongoose.Types.ObjectId(data.customerId)
-    }, { new: true });
-    if (!bankAccount) return res.status(404).send('Não foi encontrado nenhum úsuario com o ID da requisição')
+// const updateBankAccount = async(req, res, next) => {
+//     const { error } = validate(req.body)
+//     if (error) return res.status(422).send(error.details[0].message);
+//     const id = req.params.id
+//     const data = req.body
+//     let bankAccount = await BankAccount.findByIdAndUpdate(id, {
+//         number: data.number,
+//         balance: data.balance,
+//         customerId: mongoose.Types.ObjectId(data.customerId)
+//     }, { new: true });
+//     if (!bankAccount) return res.status(404).send('Não foi encontrado nenhum úsuario com o ID da requisição')
 
-    res.redirect('/getAllBankAccounts');
-}
+//     res.redirect('/getAllBankAccounts');
+// }
 
 const getDeleteBankAccountView = async(req, res, next) => {
     try {
@@ -147,8 +147,8 @@ module.exports = {
     getAllBankAccount,
     getAddBankAccountView,
     addBankAccount,
-    getUpdateBankAccountView,
-    updateBankAccount,
+    getBankAccountView,
+    // updateBankAccount,
     getDeleteBankAccountView,
     deleteBankAccount,
 }

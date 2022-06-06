@@ -1,0 +1,40 @@
+<br>
+<div class="card">
+    <div class="card-header">
+        <h4 class="font-weight-bold">Visualizando transação</h4>
+    </div>
+    <div class="card-body">
+        <form action="" method="post">
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="firstname" class="col-form-label">Operação: </label>
+                        <input type="text" class="form-control" name="number" value="<%= transaction.typeOperation %>" placeholder="Digite o numero da conta" id="number" readonly>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="firstname" class="col-form-label">Valor monetario: </label>
+                        <input type="text" class="form-control" name="balance" value="<%= transaction.value %>" placeholder="Digite seu saldo atual" id="balance" readonly>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="firstname" class="col-form-label">Conta bancaria: </label>
+                        <select class="form-select" aria-label="Default select example" name="bankAccountId" id="bankAccountId" disabled>
+                            <option value="0">Selecione</option>
+                            <% for(let bank of bankAccounts) { %>
+                                <option value="<%= bank._id %>" <%= bank.selected %>><%= bank.number %></option>
+                            <% } %>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="">
+                <br>
+                <!-- <button type="submit" class="btn btn-primary">Salvar</button> -->
+                <a href="/getAllTransactions" class="btn btn-light">Voltar</a>
+            </div>
+        </form>
+    </div>
+</div>

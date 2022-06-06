@@ -13,8 +13,8 @@ const {
     getAllBankAccount,
     getAddBankAccountView,
     addBankAccount,
-    getUpdateBankAccountView,
-    updateBankAccount,
+    getBankAccountView,
+    // updateBankAccount,
     getDeleteBankAccountView,
     deleteBankAccount
 } = require('../controllers/bankAccountController')
@@ -23,6 +23,7 @@ const {
     getAllTransactions,
     getAddTransactionView,
     addTransaction,
+    getTransactionView,
 } = require('../controllers/transactionController')
 
 const router = express.Router();
@@ -37,13 +38,14 @@ router.post('/deleteCustomer/:id', deleteCustomer)
 router.get('/getAllBankAccounts', getAllBankAccount)
 router.get('/addBankAccount', getAddBankAccountView)
 router.post('/addBankAccount', addBankAccount)
-router.get('/updateBankAccount/:id', getUpdateBankAccountView)
-router.post('/updateBankAccount/:id', updateBankAccount)
+router.get('/viewBankAccount/:id', getBankAccountView)
+    // router.post('/updateBankAccount/:id', updateBankAccount)
 router.get('/deleteBankAccount/:id', getDeleteBankAccountView)
 router.post('/deleteBankAccount/:id', deleteBankAccount)
 router.get('/getAllTransactions/', getAllTransactions)
 router.get('/addTransaction/', getAddTransactionView)
 router.post('/addTransaction/', addTransaction)
+router.get('/viewTransaction/:id', getTransactionView)
     // addTransaction
 module.exports = {
     routes: router
