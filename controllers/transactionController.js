@@ -8,13 +8,13 @@ const getAllTransactions = async(req, res, next) => {
 
     const listCorreta = getTransactionList(list, listBankAccounts)
 
-    console.log(listCorreta);
-
     res.render('transactionlist', {
         transactions: listCorreta,
         bankActive: false,
         customerActive: false,
         transactionActive: true,
+        resposta: "",
+        tipo_resposta: ""
     })
 }
 
@@ -26,6 +26,8 @@ const getAddTransactionView = async(req, res, next) => {
         bankActive: false,
         customerActive: false,
         transactionActive: true,
+        resposta: "",
+        tipo_resposta: ""
     });
 }
 
@@ -34,15 +36,58 @@ const addTransaction = async(req, res, next) => {
     if (error) return res.status(422).send(error.details[0].message);
     const data = req.body
 
-    let transaction = await new Transaction({
-        operation: data.operation,
-        value: data.value,
-        bankAccountId: mongoose.Types.ObjectId(data.bankAccountId)
-    });
+    const bankId = mongoose.Types.ObjectId(data.bankAccountId)
 
-    transaction = await transaction.save();
+    const bankAccount = await BankAccount.findById(bankId).exec()
 
-    res.redirect('/getAllTransactions');
+    //True = saque
+    if(data.operation == "true"){
+        if(bankAccount.balance == 0){
+            const listBankAccount = await BankAccount.find().exec()
+            res.render('addTransaction', {
+                bankAccounts: listBankAccount,
+                bankActive: false,
+                customerActive: false,
+                transactionActive: true,
+                resposta: `Não pode efetuar um saque para a conta ${bankAccount.number} pois não possui saldo!` ,
+                tipo_resposta: "danger"
+            });
+        }else if(bankAccount.balance < data.value){
+            const listBankAccount = await BankAccount.find().exec()
+            res.render('addTransaction', {
+                bankAccounts: listBankAccount,
+                bankActive: false,
+                customerActive: false,
+                transactionActive: true,
+                resposta: `Não pode efetuar um saque para a conta ${bankAccount.number} pois o valor de saque é maior que o saldo!` ,
+                tipo_resposta: "danger"
+            });
+        }else{
+            updateBalance(bankAccount, "-", data)
+
+            let transaction = await new Transaction({
+                operation: data.operation,
+                value: data.value,
+                bankAccountId: mongoose.Types.ObjectId(data.bankAccountId)
+            });
+    
+            transaction = await transaction.save();
+    
+            res.redirect('/getAllTransactions');
+        }
+    }else{
+        updateBalance(bankAccount, "+", data)
+        
+        let transaction = await new Transaction({
+            operation: data.operation,
+            value: data.value,
+            bankAccountId: mongoose.Types.ObjectId(data.bankAccountId)
+        });
+
+        transaction = await transaction.save();
+
+        res.redirect('/getAllTransactions');
+    }
 }
 
 const getTransactionView = async(req, res, next) => {
@@ -89,7 +134,6 @@ const getTransactionList = (list, listBankAccounts) => {
     const listCorreta = []
 
     for (transactions of list) {
-        // console.log(typeof(transactions.operation))
         if (transactions.operation == true) {
             transactions.typeOperation = "Saque"
         } else {
@@ -97,7 +141,6 @@ const getTransactionList = (list, listBankAccounts) => {
         }
         for (bank of listBankAccounts) {
             if (JSON.stringify(transactions.bankAccountId) == JSON.stringify(bank._id)) {
-                console.log("entrou aq");
                 transactions.bank = bank.number;
             }
         }
@@ -105,6 +148,26 @@ const getTransactionList = (list, listBankAccounts) => {
     }
 
     return listCorreta
+}
+
+const updateBalance = async(bank, operation, data) => {
+
+    let valor
+    console.log("teste1")
+    if(operation == "+"){
+        console.log("teste2")
+        console.log(bank._id);
+        valor = bank.balance + parseInt(data.value)
+    }else{
+        console.log("teste3")
+        console.log(bank._id);
+        valor = bank.balance - parseInt(data.value)
+    }
+    
+    let bankAccount = await BankAccount.findByIdAndUpdate(bank._id, {
+        balance: valor,
+    }, { new: true });
+    if (!bankAccount) return res.status(404).send('Não foi encontrado nenhum banco com o ID da requisição')
 }
 
 module.exports = {

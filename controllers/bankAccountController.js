@@ -9,8 +9,6 @@ const getAllBankAccount = async(req, res, next) => {
 
     const listCorreta = getCustomerNameList(list, listCustomer)
 
-    console.log(listCorreta);
-
     res.render('bankAccountlist', {
         bankAccounts: listCorreta,
         bankActive: true,
@@ -25,7 +23,8 @@ const getAddBankAccountView = async(req, res, next) => {
     res.render('addBankAccount', {
         customers: listCustomer,
         bankActive: true,
-        customerActive: false
+        customerActive: false,
+        transactionActive: false
     });
 }
 

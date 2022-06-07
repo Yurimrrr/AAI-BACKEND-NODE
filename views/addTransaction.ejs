@@ -1,4 +1,11 @@
 <br>
+<% if(resposta != ""){ %>
+    <div  class="alert alert-dismissible alert-<%= tipo_resposta%>">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong><%= resposta%></strong> 
+    </div>
+<% } %>
+<br>
 <div class="card">
     <div class="card-header">
         <h4 class="font-weight-bold">Adicionar nova transação</h4>
