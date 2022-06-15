@@ -4,13 +4,13 @@ const Joi = require('joi')
 const customerSchema = new mongoose.Schema({
     firstname: {
         type: String,
-        minlength: 5,
+        minlength: 2,
         maxlength: 50,
         required: true
     },
     lastname: {
         type: String,
-        minlength: 5,
+        minlength: 2,
         maxlength: 50,
         required: true
     },
@@ -34,8 +34,8 @@ const Customer = mongoose.model('Customer', customerSchema)
 
 const validateCustomer = (customer) => {
     const schema = {
-        firstname: Joi.string().min(5).max(50).required(),
-        lastname: Joi.string().min(5).max(50).required(),
+        firstname: Joi.string().min(2).max(50).required(),
+        lastname: Joi.string().min(2).max(50).required(),
         phonenumber: Joi.string().min(11).required(),
         cpf: Joi.string().min(11).max(11).required(),
         address: Joi.string().required(),

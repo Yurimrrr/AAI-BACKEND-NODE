@@ -133,7 +133,7 @@ const getCustomerNameList = (list, listCustomer) => {
     for (bank of list) {
         for (customer of listCustomer) {
             if (JSON.stringify(bank.customerId) == JSON.stringify(customer._id)) {
-                bank.customer = customer.firstname;
+                bank.customer = customer.firstname + " " + customer.lastname;
             }
         }
         listCorreta.push(bank);
