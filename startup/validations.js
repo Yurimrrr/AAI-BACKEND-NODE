@@ -1,3 +1,4 @@
+//Biblioteca de validação
 const Joi = require('joi');
 
 module.exports = () =>{

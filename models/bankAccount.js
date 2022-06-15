@@ -1,3 +1,4 @@
+//Crio a minha collection quando for chamada.
 const mongoose = require("mongoose");
 const Joi = require('joi')
 Joi.objectId = require('joi-objectid')(Joi)
@@ -22,9 +23,10 @@ const bankAccountSchema = new mongoose.Schema({
 
 const BankAccount = mongoose.model('BankAccount', bankAccountSchema)
 
+// valido os campos da collection.
 const validateBankAccount = (bankAccount) => {
     const schema = {
-        number: Joi.string().min(5).max(50).required(),
+        number: Joi.string().trim().min(5).max(50).required(),
         balance: Joi.number().required(),
         customerId: Joi.objectId().required(),
     }

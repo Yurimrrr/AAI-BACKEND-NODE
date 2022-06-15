@@ -1,4 +1,8 @@
 const express = require('express')
+
+//Declaro as rotas da minha aplicação
+//Cada const, pega os metodos dos controllers da aplicação.
+
 const {
     getAllCustomer,
     getAddCustomerView,
@@ -26,8 +30,10 @@ const {
     getTransactionView,
 } = require('../controllers/transactionController')
 
+//Metodo do express que inicializa a rota da aplicação
 const router = express.Router();
 
+//declaro o path da rota e o metodo que está atribuido à ele.
 router.get('/', getAllCustomer)
 router.get('/addCustomer', getAddCustomerView)
 router.post('/addCustomer', addCustomer)
@@ -39,14 +45,13 @@ router.get('/getAllBankAccounts', getAllBankAccount)
 router.get('/addBankAccount', getAddBankAccountView)
 router.post('/addBankAccount', addBankAccount)
 router.get('/viewBankAccount/:id', getBankAccountView)
-    // router.post('/updateBankAccount/:id', updateBankAccount)
 router.get('/deleteBankAccount/:id', getDeleteBankAccountView)
 router.post('/deleteBankAccount/:id', deleteBankAccount)
 router.get('/getAllTransactions/', getAllTransactions)
 router.get('/addTransaction/', getAddTransactionView)
 router.post('/addTransaction/', addTransaction)
 router.get('/viewTransaction/:id', getTransactionView)
-    // addTransaction
+
 module.exports = {
     routes: router
 }

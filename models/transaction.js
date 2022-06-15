@@ -1,3 +1,4 @@
+//Crio a minha collection quando for chamada.
 const mongoose = require("mongoose");
 const Joi = require('joi')
 Joi.objectId = require('joi-objectid')(Joi)
@@ -20,6 +21,7 @@ const transactionSchema = new mongoose.Schema({
 
 const Transaction = mongoose.model('Transaction', transactionSchema)
 
+// valido os campos da collection.
 const validateTransaction = (transaction) => {
     const schema = {
         operation: Joi.boolean().required(),

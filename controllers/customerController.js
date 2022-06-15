@@ -1,6 +1,11 @@
 const { Customer, validate } = require('../models/customer');
 
+//Como já diz o nome da função, busco no banco(documento) o resultado da tabela(collection) bankAccount
+//"GET"
+//@GET(/customerlist)
 const getAllCustomer = async(req, res, next) => {
+    //Busca sem paginação dentro do mongo, metodo find encontra todos sem filtro.
+    //metodo exec() executa a operação
     const list = await Customer.find().exec()
 
     res.render('customerlist', {
@@ -11,6 +16,8 @@ const getAllCustomer = async(req, res, next) => {
     })
 }
 
+//Função que retorna de list e renderiza a tela. "GET"
+//@GET(/addCustomer)
 const getAddCustomerView = (req, res, next) => {
     res.render('addCustomer', {
         customerActive: true,
@@ -19,6 +26,7 @@ const getAddCustomerView = (req, res, next) => {
     });
 }
 
+//Função que recebe a requisição e insere os dados. "POST"
 const addCustomer = async(req, res, next) => {
     const { error } = validate(req.body);
     if (error) return res.status(422).send(error.details[0].message);
@@ -34,6 +42,8 @@ const addCustomer = async(req, res, next) => {
     res.redirect('/');
 }
 
+//Função que retorna de list e renderiza a tela. "GET"
+//@GET(/updateCustomer)
 const getUpdateCustomerView = async(req, res, next) => {
     try {
         const id = req.params.id
@@ -49,6 +59,7 @@ const getUpdateCustomerView = async(req, res, next) => {
     }
 }
 
+//Função que recebe a requisição e atualiza os dados. "POST"
 const updateCustomer = async(req, res, next) => {
     const { error } = validate(req.body)
     if (error) return res.status(422).send(error.details[0].message);
@@ -66,6 +77,9 @@ const updateCustomer = async(req, res, next) => {
     res.redirect('/');
 }
 
+
+//Função que retorna de list e renderiza a tela. "GET"
+//@GET(/deleteCustomer)
 const getDeleteCustomerView = async(req, res, next) => {
     try {
         const id = req.params.id
@@ -81,6 +95,7 @@ const getDeleteCustomerView = async(req, res, next) => {
     }
 }
 
+//Função que recebe a requisição e deleta os dados. "POST"
 const deleteCustomer = async(req, res, next) => {
     try {
         const id = req.params.id
